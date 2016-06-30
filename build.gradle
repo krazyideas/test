@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'com.github.samueltbrown.cucumber' version '0.9'
+}
+
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    compile 'org.apache.logging.log4j:log4j-core:2.1'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.1'
+    compile 'com.jayway.restassured:rest-assured:2.9.0'
+    compile 'org.assertj:assertj-core:3.3.0'
+
+    compile 'junit:junit:4.12'
+    compile 'info.cukes:cucumber-java:1.2.4'
+    compile 'info.cukes:cucumber-junit:1.2.4'
+
+    compileOnly "org.projectlombok:lombok:1.16.8"
+}
+
+cucumber {
+    formats = ['pretty','junit:build/cucumber.xml']
+    tags = ['@test_replica_set_config, @test_mc_create, @test_mc_update, @test_mc_delete']
+}
